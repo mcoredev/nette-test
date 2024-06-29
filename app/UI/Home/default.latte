@@ -1,0 +1,29 @@
+{block content}
+<div class="mx-auto w-auto mt-20">
+	<h1 class="text-white font-bold text-center text-5xl mb-1"> Welcome back!</h1>
+	<h3 class="text-white font-bold text-center text-xl mb-8">Project App</h3>
+	<div class="bg-white rounded py-8 px-8">
+		<form n:name=signInForm class="form m-5">
+			<div>
+				{label email, class: 'p-1 mb-1 block text-slate-500'}Enter your email:{/label}
+				{input email, size: 35, autofocus: true, class: 'border border-gray-400 inline p-3', placeholder:'eg. info@example.com'}
+				{inputError email}
+			</div>
+
+			<div class="mt-2">
+				{label password, class: 'p-1 mb-1 block text-slate-500'}Your password: {/label}
+				{input password, size: 35, class: 'border border-gray-400 p-3', placeholder:'*******'}
+				{inputError password}
+			</div>
+			<div class="mt-5 text-center">
+				{input send, class: "bg-[#3bd671] hover:bg-[#3bd671e0] cursor-pointer text-white w-full p-4 rounded-full focus:outline-none focus:shadow-outline"}
+			</div>
+
+			<ul class="errors" n:ifcontent>
+				<li n:foreach="$form->getOwnErrors() as $error">{$error}</li>
+			</ul>
+		</form>
+	</div>
+</div>
+
+{/block}

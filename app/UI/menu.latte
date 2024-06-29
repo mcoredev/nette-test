@@ -1,0 +1,14 @@
+<nav class="p-4 bg-slate-800">
+    <div class="mx-auto lg:w-2/3 flex justify-between">
+        <div class="text-white font-bold">Project App</div>
+        <ul class="flex flex-inline gap-4 text-white">
+            <li class="menu-item"><a href="{link Projects:default}" class="menu-link{if isLinkCurrent(':Projects:default')}-active{/if}">Projekty</a></li>
+            <li class="menu-item"><a href="{link Tasks:default}" class="menu-link{if isLinkCurrent(':Tasks:default')}-active{/if}">Úlohy</a></li>
+            <li class="menu-item"><a href="{link Users:default}" class="menu-link{if isLinkCurrent(':Users:default')}-active{/if}">Prístup</a></li>
+            <li class="menu-item"><a href="{link Users:profile $user->id}" class="menu-link{if isLinkCurrent(':Users:profile')}-active{/if}">Profil</a></li>
+            {if $user->isLoggedIn() }
+                <li><a href="{link Home:Logout}" class="menu-link">Odhlásiť</a></li>
+            {/if}
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,57 @@
+{block headTitle}
+    <div class="flex justify-end">
+        <a n:href="Tasks:create" class="btn-primary rounded text-sm py-2 px-4 font-bold">Pridať úlohu</a>
+    </div>
+{/block}
+{block content}
+
+    <div class="">
+        <h1 class="text-2xl font-bold">Zoznam úloh</h1>
+        {foreach $tasks as $task}
+         <div class="rounded block shadow-xl hover:shadow-md bg-white  p-8 my-4 w-full relative group">
+                <div class="hidden group-hover:block absolute top-5 right-5 text-lg font-bold text-gray-500 z-index-40">
+                    <a n:href="Tasks:delete $task->id" onclick="return confirmAction(event);" class="text-rose-600 "><i class="las la-trash-alt"></i></a>
+                </div>
+                <div class="text-xs text-slate-400">{$task->updated_at|date:'d.m.Y H:i'}</div>
+                <h3 class="font-bold text-xl mb-2 cursor-pointer" onclick="location.href={link Tasks:update $task->id}">
+                    <div n:class="badge,mr-2,$task->status, inline">{$statusOptions[$task->status]}</div>
+                    {$task->name} - {$task->project->name}
+                </h3>
+
+                <p class="text-gray-500 mt-2 text-sm">{$task->description}</p>
+            </div>
+
+        {/foreach}
+
+        <div class="pagination text-center">
+            {if !$paginator->isFirst()}
+                <a n:href="default, 1">First</a>
+                &nbsp;|&nbsp;
+                <a n:href="default, $paginator->page-1">Previous</a>
+                &nbsp;|&nbsp;
+            {/if}
+
+                Stránka {$paginator->getPage()} z {$paginator->getPageCount()}
+
+	        {if !$paginator->isLast()}
+                &nbsp;|&nbsp;
+                <a n:href="default, $paginator->getPage() + 1">Next</a>
+                &nbsp;|&nbsp;
+                <a n:href="default, $paginator->getPageCount()">Last</a>
+            {/if}
+        </div>
+
+    </div>
+
+
+    <script>
+        function confirmAction(event) {
+            if (!confirm('Naozaj chcete vykonať túto akciu?')) {
+                event.preventDefault();
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+{/block}

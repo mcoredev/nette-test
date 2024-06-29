@@ -1,0 +1,33 @@
+{block content}
+
+    <h1 class="text-2xl font-bold mt-5">Upraviť úlohu - {$task->name}</h1>
+    <form n:name=taskForm class="form m-5">
+        <div>
+            {label project_id, class: 'p-1 mb-1 block text-slate-500'}Projekt:{/label}
+            {input project_id, class: 'border border-gray-400 inline p-3 w-64'}
+        </div>
+        <div>
+            {label name, class: 'p-1 mb-1 block text-slate-500'}Názov úlohy:{/label}
+            {input name, size: 35, autofocus: true, class: 'border border-gray-400 inline p-3 w-full', placeholder:'eg. zalozenie projektu vymyslenô s.r.o.'}
+            {inputError name}
+        </div>
+
+        <div class="mt-2">
+            {label description, class: 'p-1 mb-1 block text-slate-500'}Popis úlohy: {/label}
+            {input description, size: 35, class: 'border border-gray-400 p-3 w-full h-64'}
+            {inputError description}
+        </div>
+        <div>
+            {label status, class: 'p-1 mb-1 block text-slate-500'}Status:{/label}
+            {input status, class: 'border border-gray-400 inline p-3 w-32'}
+        </div>
+        <div class="mt-5 text-center">
+            {input send, value:"Upraviť úlohu", class: "bg-[#3bd671] hover:bg-[#3bd671e0] cursor-pointer text-sm text-white p-2 px-4 font-bold rounded-full focus:outline-none focus:shadow-outline"}
+            <a n:href="Tasks:default" class="btn-normal p-2 px-4 rounded-full font-bold">Spať na úlohy</a>
+        </div>
+
+        <ul class="errors" n:ifcontent>
+            <li n:foreach="$form->getOwnErrors() as $error">{$error}</li>
+        </ul>
+    </form>
+{/block}

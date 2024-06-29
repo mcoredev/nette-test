@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>{ifset title}{include title|stripHtml} | {/ifset} ProjectApp</title>
+{*	<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />*}
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="{$basePath}/css/style.css">
+</head>
+
+<body class="flex items-start justify-center min-h-screen bg-slate-800">
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type, bg-green-400,text-white,p-4,w-full,text-center,absolute">{$flash->message}</div>
+
+	{include content}
+
+	{block scripts}
+{*	<script src="https://unpkg.com/nette-forms@3/src/assets/netteForms.js"></script>*}
+	{/block}
+</body>
+</html>

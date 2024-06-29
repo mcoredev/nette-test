@@ -1,0 +1,50 @@
+{block content}
+    {*    <div class="mb-4"><a n:href="Users:default" class="text-slate-400 text-xs font-bold">/ Spať na úlohy</a></div>*}
+
+    <h2 class="text-xl font-bold">Nový užívateľ</h2>
+    <form n:name=userForm class="form m-5">
+        <div>
+            {label first_name, class: 'p-1 mb-1 block text-slate-500'}Meno:{/label}
+            {input first_name, size: 35, autofocus: true, class: 'border border-gray-400 inline p-3 w-full'}
+            {inputError first_name}
+        </div>
+
+        <div>
+            {label last_name, class: 'p-1 mb-1 block text-slate-500'}Priezvisko:{/label}
+            {input last_name, size: 35, autofocus: true, class: 'border border-gray-400 inline p-3 w-full'}
+            {inputError last_name}
+        </div>
+
+        <div>
+            {label email, class: 'p-1 mb-1 block text-slate-500'}Email:{/label}
+            {input email, size: 35, autofocus: true, class: 'border border-gray-400 inline p-3 w-full'}
+            {inputError email}
+        </div>
+
+        <div>
+            {label password, class: 'p-1 mb-1 block text-slate-500'}Heslo:{/label}
+            {input password, size: 35, autofocus: true, class: 'border border-gray-400 inline p-3 w-full'}
+            {inputError password}
+        </div>
+
+        <div>
+            {label password_confirm, class: 'p-1 mb-1 block text-slate-500'}Zopakujte heslo:{/label}
+            {input password_confirm, size: 35, autofocus: true, class: 'border border-gray-400 inline p-3 w-full'}
+            {inputError password_confirm}
+        </div>
+
+        <div>
+            {label role, class: 'p-1 mb-1 block text-slate-500'}Rola:{/label}
+            {input role, class: 'border border-gray-400 inline p-3 w-full'}
+        </div>
+
+
+        <div class="mt-5 text-center">
+            {input send, class: "bg-[#3bd671] hover:bg-[#3bd671e0] cursor-pointer text-sm text-white p-2 px-4 font-bold rounded-full focus:outline-none focus:shadow-outline"}
+        </div>
+
+        <ul class="errors" n:ifcontent>
+            <li n:foreach="$form->getOwnErrors() as $error">{$error}</li>
+        </ul>
+    </form>
+{/block}

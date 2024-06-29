@@ -1,0 +1,42 @@
+{block headTitle}
+    <div class="flex justify-between mb-5">
+        <h1 class="text-2xl font-bold">Zoznam projektov</h1>
+{*        <a n:href="Projects:create" class="btn-primary rounded text-sm py-2 px-4 font-bold">Pridať projekt</a>*}
+    </div>
+{/block}
+{block content}
+    <div class="flex flex-wrap flex-row">
+    {foreach $projects as $project}
+    <div class="rounded shadow-xl hover:shadow-md cursor-pointer bg-white  p-8 my-2 w-full relative group">
+        <div class="hidden group-hover:block absolute top-5 right-5 text-lg font-bold text-gray-500">
+            <a n:href="Projects:update $project->id"><i class="las la-edit"></i></a>
+            <a n:href="Projects:delete $project->id" onclick="return confirmAction(event);" class="text-rose-600"><i class="las la-trash-alt"></i></a>
+        </div>
+        <a n:href="Projects:preview $project->id"><h3 class="font-bold text-xl mb-2">{$project->name}</h3></a>
+        <p class="text-gray-500 text-sm">{$project->description}</p>
+
+        <ul class="text-xs mt-4 text-gray-400 flex justify-between">
+            <li>Created: {$project->created_at|date:'d.m.Y H:i'}</li>
+            <li>Updated: {$project->updated_at|date:'d.m.Y H:i'}</li>
+        </ul>
+    </div>
+
+
+    {/foreach}
+        <div class="rounded  p-10 my-4 w-full relative group border-4 border-dashed border-slate-200 flex justify-center items-center">
+            <a n:href="Projects:create" class="btn-normal hover:btn-primary rounded text-sm py-2 px-4 font-bold">Pridať projekt</a>
+        </div>
+
+    </div>
+
+    <script>
+        function confirmAction(event) {
+            if (!confirm('Naozaj chcete vykonať túto akciu?')) {
+                event.preventDefault();
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+{/block}

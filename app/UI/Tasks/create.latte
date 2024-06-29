@@ -1,0 +1,33 @@
+{block content}
+    <div class="mb-4"><a n:href="Tasks:default" class="text-slate-400 text-xs font-bold">/ Spať na úlohy</a></div>
+
+    <h2 class="text-xl font-bold">Nová úloha</h2>
+    <form n:name=taskForm class="form m-5">
+        <div>
+            {label project_id, class: 'p-1 mb-1 block text-slate-500'}Projekt:{/label}
+            {input project_id, class: 'border border-gray-400 inline p-3 w-full'}
+        </div>
+        <div>
+            {label name, class: 'p-1 mb-1 block text-slate-500'}Názov úlohy:{/label}
+            {input name, size: 35, autofocus: true, class: 'border border-gray-400 inline p-3 w-full', placeholder:'eg. zalozenie projektu vymyslenô s.r.o.'}
+            {inputError name}
+        </div>
+
+        <div class="mt-2">
+            {label description, class: 'p-1 mb-1 block text-slate-500'}Popis úlohy: {/label}
+            {input description, size: 35, class: 'border border-gray-400 p-3 w-full'}
+            {inputError description}
+        </div>
+        <div>
+            {label status, class: 'p-1 mb-1 block text-slate-500'}Status:{/label}
+            {input status, class: 'border border-gray-400 inline p-3 w-32'}
+        </div>
+        <div class="mt-5 text-center">
+            {input send, class: "bg-[#3bd671] hover:bg-[#3bd671e0] cursor-pointer text-sm text-white p-2 px-4 font-bold rounded-full focus:outline-none focus:shadow-outline"}
+        </div>
+
+        <ul class="errors" n:ifcontent>
+            <li n:foreach="$form->getOwnErrors() as $error">{$error}</li>
+        </ul>
+    </form>
+{/block}

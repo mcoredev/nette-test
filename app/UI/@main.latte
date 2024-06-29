@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{ifset title}{include title|stripHtml} | {/ifset} ProjectApp</title>
+    <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .menu-link-active{
+                @apply p-5 text-[#3bd671];
+            }
+            .menu-link {
+                @apply p-5 hover:text-[#3bd671];
+            }
+
+            .btn-primary {
+                @apply bg-[#3bd671] text-white;
+            }
+            .btn-normal {
+                @apply bg-slate-200 text-slate-400;
+            }
+            .flash.success {
+                @apply bg-[#3bd671]
+            }
+
+            .badge {
+                @apply bg-slate-200 text-slate-400 p-1 text-xs rounded;
+            }
+            .badge.new {
+                @apply bg-[#3b82f6] text-white;
+            }
+            .badge.progress {
+                @apply bg-[#f45db7] text-white;
+            }
+            .badge.done {
+                @apply bg-[#3bd671] text-white;
+            }
+            .flash.info {
+                @apply bg-[#3bd671]
+            }
+            .flash.danger {
+                @apply bg-[#3bd671]
+            }
+        }
+    </style>
+    {block styles}
+        <link rel="stylesheet" href="{$basePath}/css/style.css">
+    {/block}
+
+</head>
+<body class="bg-slate-100">
+    <div n:foreach="$flashes as $flash" n:class="flash, $flash->type, bg-green-400,text-white,p-4,w-full,text-center">{$flash->message}</div>
+    {block menu}
+        {include 'menu.latte'}
+    {/block}
+
+
+    {ifset headTitle}
+        <div class="mx-auto lg:w-2/3 pt-4 px-4 mt-2">{include #headTitle}</div>
+    {/ifset}
+
+<main class=" mx-auto w-1/2 ">
+    {include #content}
+</main>
+<footer>
+    {ifset footer}{include #footer}{/ifset}
+</footer>
+
+</body>
+</html>

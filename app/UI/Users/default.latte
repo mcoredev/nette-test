@@ -1,0 +1,42 @@
+{block headTitle}
+    <div class="flex justify-between mb-5">
+        <h1 class="text-2xl font-bold">Zoznam projektov</h1>
+        <a n:href="Users:create" class="btn-primary rounded text-sm py-2 px-4 font-bold">Pridať užívateľa</a>
+    </div>
+{/block}
+{block content}
+    <div class="rounded shadow-xl bg-white mt-4 p-2 w-full relative group">
+    <table class="min-w-full bg-white">
+        <thead>
+        <tr>
+            <th class="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-sm leading-4 text-gray-600 uppercase">ID</th>
+            <th class="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-sm leading-4 text-gray-600 uppercase">Name</th>
+            <th class="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-sm leading-4 text-gray-600 uppercase">Last Name</th>
+            <th class="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-sm leading-4 text-gray-600 uppercase">Email</th>
+            <th class="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-sm leading-4 text-gray-600 uppercase">Role</th>
+            <th class="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-sm leading-4 text-gray-600 uppercase">Last login</th>
+{*            <th class="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-sm leading-4 text-gray-600 uppercase">Created At</th>*}
+            <th class="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-sm leading-4 text-gray-600 uppercase">-</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $profiles as $profile}
+            <tr>
+                <td class="px-6 py-4 border-b border-gray-200">{$profile->id}</td>
+                <td class="px-6 py-4 border-b border-gray-200">{$profile->first_name}</td>
+                <td class="px-6 py-4 border-b border-gray-200">{$profile->last_name}</td>
+                <td class="px-6 py-4 border-b border-gray-200">{$profile->email}</td>
+                <td class="px-6 py-4 border-b border-gray-200">{$profile->role}</td>
+                <td class="px-6 py-4 border-b border-gray-200">{$profile->last_login|date:'d.m.Y H:i'}</td>
+{*                <td class="px-6 py-4 border-b border-gray-200">{$profile->created_at|date:'d.m.Y H:i'}</td>*}
+                <td class="px-6 py-4 border-b border-gray-200">
+                    <a n:href="Users:profile $profile->id"><i class="las la-edit"></i></a> |
+                    <a n:href="Users:delete $profile->id" onclick="return confirmAction(event);" class="text-rose-600"><i class="las la-trash-alt"></i></a>
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    </div>
+
+{/block}

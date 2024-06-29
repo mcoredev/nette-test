@@ -1,0 +1,32 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__.'/lib/ConsoleCommand.php';
+require_once __DIR__.'/lib/GeneratorPresenter.php';
+require_once __DIR__.'/lib/GeneratorModel.php';
+require_once __DIR__.'/lib/GeneratorService.php';
+require_once __DIR__.'/lib/GeneratorForm.php';
+
+$console =  new \Lib\ConsoleCommand();
+$console->handle($argv);
+
+$presenter =  new \Lib\GeneratorPresenter();
+$console->setCommand('create:presenter',$presenter);
+
+$model =  new \Lib\GeneratorModel();
+$console->setCommand('create:model',$model);
+
+$service = new \Lib\GeneratorService();
+$service->setArguments($console->getArguments());
+$console->setCommand('create:service',$service);
+
+$form = new \Lib\GeneratorForm();
+$form->setArguments($console->getArguments());
+$console->setCommand('create:form',$form);
+
+if ($argc < 2) {
+    echo "Usage: php genette <command> <target>\n";
+    exit(1);
+}
+
+$console->run();

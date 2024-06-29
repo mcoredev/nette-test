@@ -1,0 +1,25 @@
+{block content}
+    <div class="mb-4"><a n:href="Projects:default" class="text-slate-400 text-xs font-bold">/ Spať na projekty</a></div>
+
+    <h2 class="text-xl font-bold">Upraviť projekt - <span class="text-slate-400">{$project->name}</span></h2>
+    <form n:name=projectForm class="form m-5">
+        <div>
+            {label name, class: 'p-1 mb-1 block text-slate-500'}Názov projektu:{/label}
+            {input name, size: 35, autofocus: true, class: 'border border-gray-400 inline p-3 w-full', placeholder:'eg. blueweb projekt'}
+            {inputError name}
+        </div>
+
+        <div class="mt-2">
+            {label description, class: 'p-1 mb-1 block text-slate-500'}Popis projektu: {/label}
+            {input description, size: 35, class: 'border border-gray-400 p-3 w-full h-64'}
+            {inputError description}
+        </div>
+        <div class="mt-5 text-center">
+            {input send, value:"Upraviť projekt", class: "bg-[#3bd671] hover:bg-[#3bd671e0] text-sm cursor-pointer text-white p-2 px-4 font-bold rounded-full focus:outline-none focus:shadow-outline"}
+        </div>
+
+        <ul class="errors" n:ifcontent>
+            <li n:foreach="$form->getOwnErrors() as $error">{$error}</li>
+        </ul>
+    </form>
+{/block}
