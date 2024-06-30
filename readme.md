@@ -9,6 +9,10 @@ Genette Console Commands
 
 Generate quickly Presenters, Models, Forms, Services using console command `php genette`
 
+Important note!!!
+----------------
+The **php genette** commands are only run by this application, which has a **BasePresenter** created and customized for its needs.
+It serves only as an inspiration and demo.
 
 Generate Presenter
 ----------------
@@ -71,3 +75,6 @@ command will generate app/Admin/Forms/UserFormFactory.php
 
 **Important Note:** `<FormName>` only using the name without the  `FormFactory` suffix
 
+License
+----------------
+MIT
