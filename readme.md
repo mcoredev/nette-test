@@ -1,7 +1,7 @@
 Nette Web Project
 =================
 
-This is a basic test application built using Nette framework using custom generate console command.
+This is a basic test application built Nette framework with custom generate console command.
 
 
 Genette Console Commands
@@ -14,9 +14,15 @@ Generate Presenter
 ----------------
     php genette create:presenter <PresenterName>
 
-    php genette create:presenter <PresenterName> --path=<OtherPath>
+command generate Presenter to standard path **app/UI/PresenterNameFolder/PresenterName.php** 
+    
+    php genette create:presenter <PresenterName> --path=<your_changed_path>
 
-    e.g. php genette create:presenter Dashboard --path=app/UI/Backend
+command generate Presenter to changed path app/<your_changed_path> e.g.:
+
+    php genette create:presenter Dashboard --path=app/UI/Backend
+
+command will generate app/UI/Backend/Dashboard/DashboardPresenter.php
 
 **Important Note:** `<PresenterName>` only using the name without the  `Presenter` suffix
 
@@ -25,28 +31,43 @@ Generate Model/Repository
 ----------------
     php genette create:model <ModelName>
 
+command will generate Model/Repository to standard path **app/Models/ModelName.php**
+
     php genette create:model <ModelName> --table=<TableName>
 
-    e.g. php genette create:model Users --table=tbl_users
+command will generate Model/Repository with name of table e.g.:
 
+    php genette create:model Users --table=tbl_users
+
+command will generate app/Models/UserRepository.php with the internal table name tbl_users
 
 Generate Service
 ----------------
     php genette create:service <ServiceName>
 
-    php genette create:service <ServiceName> --path=<OtherPath>
+command will generate Service Class to standard path **app/Services/ServiceName.php**
 
-    e.g. php genette create:service PayPay --path=app/Services
+    php genette create:service <ServiceName> --path=<your_changed_path>
 
+command will generate Service Class to changed path app/<your_changed_path> e.g.:
+
+    php genette create:service PayPay --path=app/Admin/Services
+
+command will generate app/Services/Paypal.php
 
 Generate Form
 ----------------
     php genette create:form <FormName>
 
-    php genette create:form <FormName> --path=<OtherPath>
+command will generate Form Class to standard path **app/Forms/FormNameFormFactory.php**
 
-    e.g. php genette create:form User --path=app/Forms
+    php genette create:form <FormName> --path=<your_changed_path>
 
+command will generate Form Class to changed path app/<your_changed_path> e.g.:
+
+    php genette create:form User --path=app/Admin/Forms
+
+command will generate app/Admin/Forms/UserFormFactory.php
 
 **Important Note:** `<FormName>` only using the name without the  `FormFactory` suffix
 
