@@ -31,6 +31,7 @@ final class ProjectRepository
 
     public function updateById(int $id, Nette\Utils\ArrayHash $data): int|null
     {
+        $data['updated_at'] = date('Y-m-d H:i:s');
         return $this->find()->where('id', $id)->update($data);
     }
 

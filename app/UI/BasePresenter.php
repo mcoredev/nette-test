@@ -6,26 +6,29 @@ namespace App\UI;
 
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Presenter;
+use Nette\Application\UI\Template;
 
 class BasePresenter extends Presenter {
 
     public $isLoggedIn = false;
+    public $userRoles = [];
+    public $isUserAdmin = false;
 
     protected function startup(): void
     {
         parent::startup();
 
         $this->isLoggedIn = $this->getUser()->isLoggedIn();
+        $this->userRoles = $this->getUser()->getRoles();
+        $this->isUserAdmin = in_array('admin',$this->userRoles);
 
-        $this->accesRequestAction();
-
+        $this->accessRequestAction();
     }
 
-    protected function accesRequestAction()
+    protected function accessRequestAction()
     {
         $filters = $this->filters();
         $requestAction = $this->request->getParameter('action');
-        $userAuth = $this->isLoggedIn ? 'auth' : 'guest';
 
         if(isset($filters['access'])) {
             $filerRules = $filters['access']['rules'];
@@ -35,7 +38,8 @@ class BasePresenter extends Presenter {
                 foreach ($rule['actions'] as $action) {
                     if($action === $requestAction || $action === '*') {
 
-                        if($rule['auth'] !== $this->isLoggedIn ) {
+                        if($rule['auth'] !== $this->isLoggedIn || (isset($rule['role']) && !$this->isUserAdmin && !in_array($rule['role'],$this->userRoles)) ) {
+
                             if(isset($rule['redirect'])) {
                                 $this->redirect($rule['redirect']);
                             }
@@ -45,6 +49,24 @@ class BasePresenter extends Presenter {
                 }
             }
         }
+    }
+
+    public function userHasRole($role = null)
+    {
+        if($this->isUserAdmin) {
+            return true;
+        }
+
+        return $this->user->isLoggedIn() && in_array($role,$this->user->getRoles());
+    }
+
+    protected function createTemplate(?string $class = null): Template
+    {
+        $template = parent::createTemplate($class);
+        $template->addFilter('hasRole', function ($input, $role) {
+            return $this->userHasRole($role) ? $input : null;
+        });
+        return $template;
     }
 
     protected function filters()

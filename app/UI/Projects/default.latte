@@ -9,8 +9,13 @@
     {foreach $projects as $project}
     <div class="rounded shadow-xl hover:shadow-md cursor-pointer bg-white  p-8 my-2 w-full relative group">
         <div class="hidden group-hover:block absolute top-5 right-5 text-lg font-bold text-gray-500">
+            {if $presenter->userHasRole('editor') }
             <a n:href="Projects:update $project->id"><i class="las la-edit"></i></a>
+            {/if}
+
+            {if $presenter->userHasRole('admin') }
             <a n:href="Projects:delete $project->id" onclick="return confirmAction(event);" class="text-rose-600"><i class="las la-trash-alt"></i></a>
+            {/if}
         </div>
         <a n:href="Projects:preview $project->id"><h3 class="font-bold text-xl mb-2">{$project->name}</h3></a>
         <p class="text-gray-500 text-sm">{$project->description}</p>

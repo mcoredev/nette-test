@@ -11,7 +11,6 @@ class SignInFormFactory
     {
         $form = new Form;
         $form->addEmail('email', 'Enter your email:')
-            ->setValue('simko@mcore.sk')
             ->setRequired();
         $form->addPassword('password', 'Your password:')
             ->setRequired();

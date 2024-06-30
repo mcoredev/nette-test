@@ -18,6 +18,7 @@ class ProjectsPresenter extends BasePresenter {
                 'rules' =>  [
                     [
                         'actions' => ['*'],
+                        'role' => 'editor',
                         'auth' => true,
                         'redirect' => 'Home:',
                     ],
