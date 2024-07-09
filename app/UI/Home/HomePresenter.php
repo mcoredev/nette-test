@@ -70,7 +70,7 @@ final class HomePresenter extends BasePresenter
             $this->redirect('Projects:');
 
         } catch (Nette\Security\AuthenticationException $e) {
-            $form->addError('Nesprávné přihlašovací jméno nebo heslo.');
+            $form->addError($e->getMessage());
         }
 //        $this->flashMessage('Login has been succesfully.', 'success');
 //        $this->redirect('Project');

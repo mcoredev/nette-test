@@ -17,10 +17,10 @@ class Authenticator implements Nette\Security\Authenticator
 
     public function authenticate(string $user, string $password): SimpleIdentity
     {
-        $row = $this->userRepository->find()->where('email', $user)->fetch();
+        $row = $this->userRepository->findByEmail($user)->where('is_active',1)->fetch();
 
         if (!$row) {
-            throw new Nette\Security\AuthenticationException('User not found.');
+            throw new Nette\Security\AuthenticationException('User not found or not actived!');
         }
 
         if (!$this->passwords->verify($password, $row->password)) {

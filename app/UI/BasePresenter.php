@@ -38,7 +38,7 @@ class BasePresenter extends Presenter {
                 foreach ($rule['actions'] as $action) {
                     if($action === $requestAction || $action === '*') {
 
-                        if($rule['auth'] !== $this->isLoggedIn || (isset($rule['role']) && !$this->isUserAdmin && !in_array($rule['role'],$this->userRoles)) ) {
+                        if((isset($rule['auth']) && $rule['auth'] !== $this->isLoggedIn) || (isset($rule['role']) && !$this->isUserAdmin && !in_array($rule['role'],$this->userRoles)) ) {
 
                             if(isset($rule['redirect'])) {
                                 $this->redirect($rule['redirect']);
@@ -57,7 +57,7 @@ class BasePresenter extends Presenter {
             return true;
         }
 
-        return $this->user->isLoggedIn() && in_array($role,$this->user->getRoles());
+        return $this->user->isLoggedIn() && in_array($role, $this->user->getRoles());
     }
 
     protected function createTemplate(?string $class = null): Template
