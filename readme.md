@@ -4,7 +4,7 @@ Nette Web Project
 This is a basic test application built Nette framework with custom generate console command.
 
 
-Gnette Console Commands
+Nette Console Commands
 ----------------
 
 Generate quickly Presenters, Models, Forms, Services, Control using console command `php nette`
@@ -77,20 +77,20 @@ command will generate App/Admin/Forms/UserFormFactory.php
 
 Generate Control
 ----------------
-    php nette create:Control <ControlName>
+    php nette create:control <ControlName>
 
 command will generate Control Class to standard path **App/Control/ControlName/Control.php**
 
-    php nette create:Control <ControlName> --path=<your_changed_path>
+    php nette create:control <ControlName> --path=<your_changed_path>
 
 command will generate Control Class to changed path app/<your_changed_path> e.g.:
 
-    php nette create:Control Project/Grid --path=App/Components
+    php nette create:control Project/Grid --path=App/Components
 
 command will generate: 
-- App/Control/Project/Grid/Control.php
-- App/Control/Project/Grid/ControlFactory.php
-- App/Control/Project/Grid/default.latte
+- App/Components/Project/Grid/Control.php
+- App/Components/Project/Grid/ControlFactory.php
+- App/Components/Project/Grid/default.latte
 
 
 License
