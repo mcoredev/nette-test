@@ -15,14 +15,14 @@ final class UserRepository
 
     public function find(): Nette\Database\Table\Selection
     {
-        return $this->database->table('users');
+        return $this->database->table('user');
     }
 
     public function getRoleOptions()
     {
         return [
             'admin' => 'Administrátor',
-            'editor' => 'Editor',
+            'client' => 'Klient',
         ];
     }
 

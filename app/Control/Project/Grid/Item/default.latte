@@ -1,0 +1,19 @@
+<div class="rounded shadow-xl hover:shadow-md cursor-pointer bg-white  p-8 my-2 w-full relative group">
+    <div class="hidden group-hover:block absolute top-5 right-5 text-lg font-bold text-gray-500">
+        {if $presenter->userHasRole('editor') }
+            <a href="{plink Projects:update $project->id}"><i class="las la-edit"></i></a>
+        {/if}
+
+        {if $presenter->userHasRole('admin') }
+            <a href="{plink Projects:delete $project->id}" onclick="return confirmAction(event);" class="text-rose-600"><i class="las la-trash-alt"></i></a>
+        {/if}
+    </div>
+    <a href="{plink Projects:preview $project->id }"><h3 class="font-bold text-xl mb-2">{$project->name}</h3></a>
+    <p class="text-gray-500 text-sm">{$project->description}</p>
+
+    <ul class="text-xs mt-4 text-gray-400 flex justify-between">
+        <li>Created: {$project->created_at|date:'d.m.Y H:i'}</li>
+        <li>Updated: {$project->updated_at|date:'d.m.Y H:i'}</li>
+    </ul>
+</div>
+

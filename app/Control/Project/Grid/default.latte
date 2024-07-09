@@ -1,0 +1,13 @@
+{foreach $projects as $project}
+    {control "item-$project->id"}
+{/foreach}
+
+<script>
+    function confirmAction(event) {
+        if (!confirm('Naozaj chcete vykonať túto akciu?')) {
+            event.preventDefault();
+            return false;
+        }
+        return true;
+    }
+</script>

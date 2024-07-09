@@ -12,10 +12,12 @@ final class TaskRepository
     ) {
     }
 
-    public function find():  Nette\Database\Table\Selection
+    private function getTableName()
     {
-        return $this->database->table('tasks');
+        return "task";
     }
+
+
 
     public function getStatusOptions()
     {
@@ -63,5 +65,10 @@ final class TaskRepository
     public function getPublicTasksCount(): int
     {
         return $this->getPublicTasks()->count('*');
+    }
+
+    public function find():  Nette\Database\Table\Selection
+    {
+        return $this->database->table($this->getTableName());
     }
 }

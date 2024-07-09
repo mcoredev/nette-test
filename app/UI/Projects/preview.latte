@@ -18,7 +18,7 @@
         <div class="mt-5">
             <h4 class="font-bold">Zoznam úloh v projekte: </h4>
             <ul>
-                {foreach $project->related('tasks.project_id') as $task}
+                {foreach $project->related('task.project_id') as $task}
                     <li class="py-4"><hr></li>
                     <li>
                         <div class=" flex flex-inline font-bold"> <div n:class="badge,mr-2,$task->status">{$taskStatusOptions[$task->status]}</div> <div>{$task->name}</div> </div>

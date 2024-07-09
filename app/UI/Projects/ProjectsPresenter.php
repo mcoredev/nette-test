@@ -3,13 +3,16 @@ declare(strict_types=1);
 
 namespace App\UI\Projects;
 
+use App\Forms\ProjectFormFactory;
 use App\Model\ProjectRepository;
 use App\Model\TaskRepository;
 use App\UI\BasePresenter;
-use App\Forms\ProjectFormFactory;
 use Nette\Neon\Exception;
+use App\Control;
 
-class ProjectsPresenter extends BasePresenter {
+class ProjectsPresenter extends BasePresenter
+{
+    use Control\Project\Grid\ControlTrait;
 
     protected function filters(): array
     {
@@ -49,7 +52,6 @@ class ProjectsPresenter extends BasePresenter {
 
     public function renderCreate(): void
     {
-
     }
 
     public function renderPreview(int $id): void

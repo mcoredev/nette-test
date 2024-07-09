@@ -9,6 +9,7 @@ use App\UI\BasePresenter;
 use Exception;
 use Nette\Application\UI\Presenter;
 use Nette\Utils\Paginator;
+use TaskControl;
 
 class TasksPresenter extends BasePresenter {
 
@@ -41,6 +42,14 @@ class TasksPresenter extends BasePresenter {
     {
         parent::__construct();
     }
+
+    protected function createComponentTaskItem(): TaskControl
+    {
+        $task = new TaskControl;
+        $task->items = $this->item;
+        return $task;
+    }
+
     public function renderDefault(int $page = 1): void
     {
         $this->template->statusOptions = $this->taskRepository->getStatusOptions();

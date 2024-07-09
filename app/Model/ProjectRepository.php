@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Model;
 
 use Nette;
+use Nette\Utils\Random;
 
 final class ProjectRepository
 {
@@ -12,14 +13,16 @@ final class ProjectRepository
     ) {
     }
 
-    public function find():  Nette\Database\Table\Selection
+    private function getTableName()
     {
-        return $this->database->table('projects');
+        return "project";
     }
+
     public function add(string $name, string $description): void
     {
         $this->find()->insert([
             'name' => $name,
+            'code' => Random::generate(64),
             'description' => $description,
         ]);
     }
@@ -40,6 +43,11 @@ final class ProjectRepository
         return $this->find()
             ->where('id', $id)
             ->delete();
+    }
+
+    public function find():  Nette\Database\Table\Selection
+    {
+        return $this->database->table($this->getTableName());
     }
 
 }

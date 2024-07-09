@@ -31,6 +31,8 @@ class ProfileFormFactory
         $form->addPassword('password_confirm', 'Confirm Password:')
             ->addRule($form::Equal, 'Passwords do not match.', $form['password']);
 
+        $form->addCheckbox('is_active','Is active');
+
         $form->addSelect('role','Rola', $this->userRepository->getRoleOptions());
         return $form;
     }
