@@ -12,43 +12,43 @@ final class {ModelName}Repository
     ) {
     }
 
-    protected function db()
+    protected function getTableName()
     {
-        return $this->database->table("{table_name}");
+        return "{table_name}";
     }
 
-    public function add(string $name, string $description): void
+    public function create(Nette\Utils\ArrayHash $data): void
     {
-        // logic here
-    }
-
-    public function findAll(): Nette\Database\Table\Selection
-    {
-        return $this->db();
-    }
-
-    public function findById(int $id): Nette\Database\Table\ActiveRow|null
-    {
-        return $this->db()->where('id', $id);
-    }
-
-    public function find(): Nette\Database\Table\Selection
-    {
-        return $this->db();
+        // $this->find()->insert($data);
     }
 
     public function updateById(int $id, Nette\Utils\ArrayHash $data): int|null
     {
-        return (!empty($data)) ? $this->db()
+        return (!empty($data)) ? $this->find()
             ->where('id', $id)
             ->update($data) : null;
     }
 
     public function deleteById(int $id): int
     {
-        return $this->db()
+        return $this->find()
             ->where('id', $id)
             ->delete();
+    }
+
+    public function findAll(): Nette\Database\Table\Selection
+    {
+        return $this->find();
+    }
+
+    public function findById(int $id): Nette\Database\Table\ActiveRow|null
+    {
+        return $this->find()->where('id', $id);
+    }
+
+    protected function find()
+    {
+        return $this->database->table($this->getTableName());
     }
 
 }

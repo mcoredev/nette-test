@@ -27,6 +27,7 @@ final class {PresenterName}Presenter extends BasePresenter
     protected function startup(): void
     {
         parent::startup();
+        $this->setLayout('main');
     }
 
     public function renderDefault(): void

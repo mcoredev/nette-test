@@ -6,6 +6,7 @@ require_once __DIR__.'/lib/GeneratorPresenter.php';
 require_once __DIR__.'/lib/GeneratorModel.php';
 require_once __DIR__.'/lib/GeneratorService.php';
 require_once __DIR__.'/lib/GeneratorForm.php';
+require_once __DIR__.'/lib/GeneratorControl.php';
 
 $console =  new \Lib\ConsoleCommand();
 $console->handle($argv);
@@ -24,8 +25,12 @@ $form = new \Lib\GeneratorForm();
 $form->setArguments($console->getArguments());
 $console->setCommand('create:form',$form);
 
+$form = new \Lib\GeneratorControl();
+$form->setArguments($console->getArguments());
+$console->setCommand('create:control',$form);
+
 if ($argc < 2) {
-    echo "Usage: php genette <command> <target>\n";
+    echo "Usage: php nette <command> <target>\n";
     exit(1);
 }
 

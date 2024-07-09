@@ -47,7 +47,7 @@ class ConsoleCommand {
             $generator->run();
         }
         else {
-            echo "Usage: php genette $this->command not to found!\n";
+            echo "Usage: php nette $this->command not to found!\n";
             exit(1);
         }
     }
