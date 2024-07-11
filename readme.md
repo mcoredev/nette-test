@@ -30,6 +30,17 @@ command will generate App/UI/Backend/Dashboard/DashboardPresenter.php
 
 **Important Note:** `<PresenterName>` only using the name without the  `Presenter` suffix
 
+Generate Latte
+----------------
+    php nette create:latte <LatteName> --path=<your_presenter_path>
+
+**Important! command create:latte have required parameter --path** 
+
+command will generate Latte Class to changed path app/<your_changed_path> e.g.:
+
+    php nette create:latte create --path=App/UI/Project
+
+command will generate create.latte to **App/UI/Project/create.latte**
 
 Generate Model/Repository
 ----------------
