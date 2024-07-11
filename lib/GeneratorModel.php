@@ -3,38 +3,27 @@
 namespace Lib;
 
 require_once __DIR__.'/GeneratorUtils.php';
-class GeneratorModel {
+require_once __DIR__.'/BaseGenerator.php';
 
+class GeneratorModel extends BaseGenerator {
+
+    const TABLE_DEFAULT = "your_table";
     const DIR_DEFAULT = "app/Model";
-    protected $args;
-    protected $path;
-    protected $templateDirectory;
 
     public function __construct()
     {
-        $this->path = __DIR__ . '/../';
+        parent::__construct();
     }
 
-    public function setArguments($args = null)
-    {
-        $this->args = $args;
-    }
-
-    public function setTemplateDirectory($path = null)
-    {
-        $this->templateDirectory = $path;
-    }
-
-    public function getTemplateDirectory()
-    {
-        return $this->templateDirectory;
-    }
     public function run(): void
     {
-        $path = $this->path . self::DIR_DEFAULT;
-
         $targetName = $this->args[2];
-        $targetTable = "your_table";
+
+        $targetTable = self::TABLE_DEFAULT;
+        $namespace = self::DIR_DEFAULT;
+        $targetDir = $this->absolute_path . self::DIR_DEFAULT;
+
+        $targetFilename = $targetDir.'/'.$targetName.'Repository';
 
         if(isset($this->args[3]) && str_contains($this->args[3],"--table=") ) {
             $targetTable = str_replace("--table=","",$this->args[3]);
@@ -44,9 +33,10 @@ class GeneratorModel {
             '{ModelName}' => $targetName,
             '{modelName}' => strtolower($targetName),
             '{table_name}' => $targetTable,
+            '{namespace}' => ucfirst(str_replace('/','\\',$namespace)),
         ];
 
-        GeneratorUtils::createDirectory($path);
-        GeneratorUtils::copyTemplate($this->getTemplateDirectory() . '/{ModelName}Repository.php', $path.'/'.$targetName.'Repository.php', $placeholders);
+        GeneratorUtils::createDirectory($targetDir);
+        GeneratorUtils::copyTemplate($this->getTemplateDirectory() . '/{ModelName}Repository.php', $targetFilename.'.php', $placeholders);
     }
 }

@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace {path};
+namespace {namespace};
 
-use Nette;
 use Nette\Application\UI\Presenter;
 use App\UI\BasePresenter;
 

@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace {path};
+namespace {namespace};
 
 use Nette\Application\UI\Control;
 

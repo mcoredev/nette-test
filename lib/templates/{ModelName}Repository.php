@@ -1,9 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model;
+namespace {namespace};
 
-use Nette;
 
 final class {ModelName}Repository
 {

@@ -1,11 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace {path};
+namespace {namespace};
 
-use Nette;
 
 class {ServiceName}
 {
-    //your custom service login
+    //your custom service logic
 }

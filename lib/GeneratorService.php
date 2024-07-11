@@ -3,48 +3,32 @@
 namespace Lib;
 
 require_once __DIR__.'/GeneratorUtils.php';
-class GeneratorService {
+require_once __DIR__.'/BaseGenerator.php';
+class GeneratorService extends BaseGenerator {
 
     const DIR_DEFAULT = "app/Service";
-    protected $args;
-    protected $path;
-    protected $templateDirectory;
 
     public function __construct()
     {
-        $this->path = __DIR__ . '/../';
+        parent::__construct();
     }
 
-    public function setArguments($args = null)
-    {
-        $this->args = $args;
-    }
-
-    public function setTemplateDirectory($path = null)
-    {
-        $this->templateDirectory = $path;
-    }
-
-    public function getTemplateDirectory()
-    {
-        return $this->templateDirectory;
-    }
     public function run(): void
     {
-        $path = $this->path . self::DIR_DEFAULT;
-
         $targetName = $this->args[2];
+
+        $path = $this->absolute_path . self::DIR_DEFAULT;
 
         $targetPath = self::DIR_DEFAULT;
 
         if(isset($this->args[3]) && str_contains($this->args[3],"--path=") ) {
             $targetPath = str_replace("--path=","",$this->args[3]);
-            $path = $this->path . $targetPath;
+            $path = $this->absolute_path . $targetPath;
         }
         $placeholders = [
             '{ServiceName}' => $targetName,
             '{serviceName}' => strtolower($targetName),
-            '{path}' => ucfirst(str_replace('/','\\',$targetPath)),
+            '{namespace}' => ucfirst(str_replace('/','\\',$targetPath)),
         ];
 
         GeneratorUtils::createDirectory($path);

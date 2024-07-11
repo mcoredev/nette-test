@@ -2,56 +2,36 @@
 namespace Lib;
 
 require_once __DIR__.'/GeneratorUtils.php';
+require_once __DIR__.'/BaseGenerator.php';
 
-class GeneratorPresenter  {
+class GeneratorPresenter extends BaseGenerator {
     const DIR_DEFAULT = "app/UI";
-    protected $args;
-    protected $path;
-    protected $templateDirectory;
 
     public function __construct()
     {
-        $this->path = __DIR__ . '/../';
-    }
+        parent::__construct();
 
-    public function setArguments($args = null)
-    {
-        $this->args = $args;
     }
-
-    public function setTemplateDirectory($path = null)
-    {
-        $this->templateDirectory = $path;
-    }
-
-    public function getTemplateDirectory()
-    {
-        return $this->templateDirectory;
-    }
-
     public function run(): void
     {
-        $path = $this->path . self::DIR_DEFAULT;
-
         $targetName = $this->args[2];
-        $targetPath = self::DIR_DEFAULT;
 
-        if(isset($this->args[3]) && str_contains($this->args[3],"--path=") ) {
-            $targetPath = str_replace("--path=","",$this->args[3]);
-            $path = $this->path . $targetPath;
-        }
+        $arg = $this->getArgumentPath($targetName,self::DIR_DEFAULT);
+
+        $targetDir = $arg['targetDir'].'/'.$targetName;
+        $namespace = $arg['namespace'];
+
+        $targetFilename = $targetDir.'/'.$targetName.'Presenter';
 
         $placeholders = [
             '{PresenterName}' => $targetName,
             '{presenterName}' => strtolower($targetName),
-            '{path}' => ucfirst(str_replace('/','\\',$targetPath)).'\\'.$targetName,
+            '{namespace}' => ucfirst(str_replace('/','\\',$namespace)),
         ];
 
-        $targetDir = $path . '/' . $targetName;
-
         GeneratorUtils::createDirectory($targetDir);
-        GeneratorUtils::copyTemplate($this->getTemplateDirectory() . '/{PresenterName}Presenter.php', $targetDir.'/'.$targetName.'Presenter.php', $placeholders);
-        GeneratorUtils::copyTemplate($this->getTemplateDirectory() . '/default.latte', $targetDir.'/default.latte', $placeholders);
+        GeneratorUtils::copyTemplate($this->getTemplateDirectory() . '/Presenter/{PresenterName}Presenter.php', $targetFilename . '.php', $placeholders);
+        GeneratorUtils::copyTemplate($this->getTemplateDirectory() . '/Presenter/default.latte', $targetDir . '/default.latte', $placeholders);
     }
 
 }
