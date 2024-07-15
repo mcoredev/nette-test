@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace {namespace};
 
+use Nette;
 use Nette\Application\UI\Control as UIControl;
 
 class Control extends UIControl

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace {namespace};
 
+use Nette;
 
 final class {ModelName}Repository
 {
@@ -35,17 +36,17 @@ final class {ModelName}Repository
             ->delete();
     }
 
-    public function findAll(): Nette\Database\Table\Selection
+    public function findAll(): Nette\Database\Table\Selection|null
     {
         return $this->find();
     }
 
     public function findById(int $id): Nette\Database\Table\ActiveRow|null
     {
-        return $this->find()->where('id', $id);
+        return $this->find()->get($id);
     }
 
-    protected function find()
+    protected function find(): Nette\Database\Table\Selection|null
     {
         return $this->database->table($this->getTableName());
     }
